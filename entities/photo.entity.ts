@@ -6,11 +6,11 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Antikvitet } from "./Antikvitet";
+import { Antikvitet } from "./antikvitet.entity";
 
 @Index("fk_photo_antikvitet_id", ["antikvitetId"], {})
 @Index("uq_image_path", ["imagePath"], { unique: true })
-@Entity("photo", { schema: "antiq" })
+@Entity("photo")
 export class Photo {
   @PrimaryGeneratedColumn({ type: "int", name: "photo_id", unsigned: true })
   photoId: number;

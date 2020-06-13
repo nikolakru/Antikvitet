@@ -7,13 +7,13 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Country } from "./Country";
-import { IngredientAntikvitet } from "./IngredientAntikvitet";
-import { Photo } from "./Photo";
+import { Country } from "./country.entity";
+import { IngredientAntikvitet } from "./ingredientAntikvitet.entity";
+import { Photo } from "./photo.entity";
 
 @Index("fk_antikvitet_country_id", ["countryId"], {})
 @Index("uq_antikvitet_name", ["name"], { unique: true })
-@Entity("antikvitet", { schema: "antiq" })
+@Entity("antikvitet")
 export class Antikvitet {
   @PrimaryGeneratedColumn({
     type: "int",

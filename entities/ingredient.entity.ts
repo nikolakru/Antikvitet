@@ -5,10 +5,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { IngredientAntikvitet } from "./IngredientAntikvitet";
+import { IngredientAntikvitet } from "./ingredientAntikvitet.entity";
 
 @Index("uq_ingredient_name", ["name"], { unique: true })
-@Entity("ingredient", { schema: "antiq" })
+@Entity("ingredient")
 export class Ingredient {
   @PrimaryGeneratedColumn({
     type: "int",

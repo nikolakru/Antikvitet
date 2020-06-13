@@ -7,11 +7,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Antikvitet } from "./Antikvitet";
+import { Antikvitet } from "./antikvitet.entity";
 
 @Index("fk_country_antikvitet_id", ["antikvitetId"], {})
 @Index("uq_country_country_name", ["countryName"], { unique: true })
-@Entity("country", { schema: "antiq" })
+@Entity("country")
 export class Country {
   @PrimaryGeneratedColumn({ type: "int", name: "country_id", unsigned: true })
   countryId: number;
