@@ -13,7 +13,7 @@ import { Photo } from "./photo.entity";
 
 @Index("fk_antikvitet_country_id", ["countryId"], {})
 @Index("uq_antikvitet_name", ["name"], { unique: true })
-@Entity("antikvitet")
+@Entity()
 export class Antikvitet {
   @PrimaryGeneratedColumn({
     type: "int",

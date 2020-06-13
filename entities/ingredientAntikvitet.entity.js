@@ -44,7 +44,7 @@ __decorate([
 IngredientAntikvitet = __decorate([
     typeorm_1.Index("fk_ingredient_antikvitet_antikvitet_id", ["antikvitetId"], {}),
     typeorm_1.Index("fk_ingredient_antikvitet_ingredient_id", ["ingredientId"], {}),
-    typeorm_1.Entity("ingredient_antikvitet")
+    typeorm_1.Entity()
 ], IngredientAntikvitet);
 exports.IngredientAntikvitet = IngredientAntikvitet;
 //# sourceMappingURL=ingredientAntikvitet.entity.js.map

@@ -8,7 +8,7 @@ import {
 import { IngredientAntikvitet } from "./ingredientAntikvitet.entity";
 
 @Index("uq_ingredient_name", ["name"], { unique: true })
-@Entity("ingredient")
+@Entity()
 export class Ingredient {
   @PrimaryGeneratedColumn({
     type: "int",

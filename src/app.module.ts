@@ -1,9 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DatabaseConfiguration } from 'config/database.configuration';
-import { Administrator } from 'entities/administrator.entity';
+import { DatabaseConfiguration } from '../config/database.configuration';
+import { Administrator } from '../entities/administrator.entity';
 import { AdministratorService } from './services/administrator/administrator.service';
+import { Antikvitet } from '../entities/antikvitet.entity';
+import { Country } from '../entities/country.entity';
+import { Ingredient } from '../entities/ingredient.entity';
+import { IngredientAntikvitet } from '../entities/ingredientAntikvitet.entity';
+import { Photo } from '../entities/photo.entity';
 
 
 
@@ -16,7 +21,7 @@ import { AdministratorService } from './services/administrator/administrator.ser
       username: DatabaseConfiguration.username,
       password: DatabaseConfiguration.password,
       database: DatabaseConfiguration.database,
-      entities: [Administrator]
+      entities: [Administrator, Antikvitet, Country, Ingredient, IngredientAntikvitet, Photo ]
     }),
       TypeOrmModule.forFeature([ Administrator])
   ],

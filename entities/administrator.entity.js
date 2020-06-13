@@ -31,7 +31,7 @@ __decorate([
 ], Administrator.prototype, "passwordHash", void 0);
 Administrator = __decorate([
     typeorm_1.Index("uq_administrator_username", ["username"], { unique: true }),
-    typeorm_1.Entity("administrator")
+    typeorm_1.Entity()
 ], Administrator);
 exports.Administrator = Administrator;
 //# sourceMappingURL=administrator.entity.js.map

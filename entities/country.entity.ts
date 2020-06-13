@@ -11,7 +11,7 @@ import { Antikvitet } from "./antikvitet.entity";
 
 @Index("fk_country_antikvitet_id", ["antikvitetId"], {})
 @Index("uq_country_country_name", ["countryName"], { unique: true })
-@Entity("country")
+@Entity()
 export class Country {
   @PrimaryGeneratedColumn({ type: "int", name: "country_id", unsigned: true })
   countryId: number;

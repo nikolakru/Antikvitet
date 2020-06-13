@@ -41,7 +41,7 @@ __decorate([
 Country = __decorate([
     typeorm_1.Index("fk_country_antikvitet_id", ["antikvitetId"], {}),
     typeorm_1.Index("uq_country_country_name", ["countryName"], { unique: true }),
-    typeorm_1.Entity("country")
+    typeorm_1.Entity()
 ], Country);
 exports.Country = Country;
 //# sourceMappingURL=country.entity.js.map

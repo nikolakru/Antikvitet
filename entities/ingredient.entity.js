@@ -32,7 +32,7 @@ __decorate([
 ], Ingredient.prototype, "ingredientAntikvitets", void 0);
 Ingredient = __decorate([
     typeorm_1.Index("uq_ingredient_name", ["name"], { unique: true }),
-    typeorm_1.Entity("ingredient")
+    typeorm_1.Entity()
 ], Ingredient);
 exports.Ingredient = Ingredient;
 //# sourceMappingURL=ingredient.entity.js.map

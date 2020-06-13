@@ -11,7 +11,7 @@ import { Ingredient } from "./ingredient.entity";
 
 @Index("fk_ingredient_antikvitet_antikvitet_id", ["antikvitetId"], {})
 @Index("fk_ingredient_antikvitet_ingredient_id", ["ingredientId"], {})
-@Entity("ingredient_antikvitet")
+@Entity()
 export class IngredientAntikvitet {
   @PrimaryGeneratedColumn({
     type: "int",

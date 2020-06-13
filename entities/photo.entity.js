@@ -37,7 +37,7 @@ __decorate([
 Photo = __decorate([
     typeorm_1.Index("fk_photo_antikvitet_id", ["antikvitetId"], {}),
     typeorm_1.Index("uq_image_path", ["imagePath"], { unique: true }),
-    typeorm_1.Entity("photo")
+    typeorm_1.Entity()
 ], Photo);
 exports.Photo = Photo;
 //# sourceMappingURL=photo.entity.js.map

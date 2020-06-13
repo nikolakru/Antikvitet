@@ -72,7 +72,7 @@ __decorate([
 Antikvitet = __decorate([
     typeorm_1.Index("fk_antikvitet_country_id", ["countryId"], {}),
     typeorm_1.Index("uq_antikvitet_name", ["name"], { unique: true }),
-    typeorm_1.Entity("antikvitet")
+    typeorm_1.Entity()
 ], Antikvitet);
 exports.Antikvitet = Antikvitet;
 //# sourceMappingURL=antikvitet.entity.js.map

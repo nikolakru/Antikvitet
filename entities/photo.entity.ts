@@ -10,7 +10,7 @@ import { Antikvitet } from "./antikvitet.entity";
 
 @Index("fk_photo_antikvitet_id", ["antikvitetId"], {})
 @Index("uq_image_path", ["imagePath"], { unique: true })
-@Entity("photo")
+@Entity()
 export class Photo {
   @PrimaryGeneratedColumn({ type: "int", name: "photo_id", unsigned: true })
   photoId: number;
