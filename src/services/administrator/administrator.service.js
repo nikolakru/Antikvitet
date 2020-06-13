@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdministratorService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const administrator_entity_1 = require("../../../../../../../../../../entities/administrator.entity");
+const administrator_entity_1 = require("../entities/administrator.entity");
 const typeorm_2 = require("typeorm");
 let AdministratorService = class AdministratorService {
     constructor(administrator) {
