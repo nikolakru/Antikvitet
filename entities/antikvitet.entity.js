@@ -14,6 +14,7 @@ const typeorm_1 = require("typeorm");
 const country_entity_1 = require("./country.entity");
 const ingredientAntikvitet_entity_1 = require("./ingredientAntikvitet.entity");
 const photo_entity_1 = require("./photo.entity");
+const ingredient_entity_1 = require("./ingredient.entity");
 let Antikvitet = class Antikvitet {
 };
 __decorate([
@@ -65,6 +66,15 @@ __decorate([
     typeorm_1.OneToMany(() => ingredientAntikvitet_entity_1.IngredientAntikvitet, (ingredientAntikvitet) => ingredientAntikvitet.antikvitet),
     __metadata("design:type", Array)
 ], Antikvitet.prototype, "ingredientAntikvitets", void 0);
+__decorate([
+    typeorm_1.ManyToMany(type => ingredient_entity_1.Ingredient, ingredient => ingredient.antikvitets),
+    typeorm_1.JoinTable({
+        name: "ingredient_antikvitet",
+        joinColumn: { name: "antikvitet_id", referencedColumnName: "antikvitetId" },
+        inverseJoinColumn: { name: "ingredient_id", referencedColumnName: "ingredientId" }
+    }),
+    __metadata("design:type", Array)
+], Antikvitet.prototype, "ingredients", void 0);
 __decorate([
     typeorm_1.OneToMany(() => photo_entity_1.Photo, (photo) => photo.antikvitet),
     __metadata("design:type", Array)

@@ -10,6 +10,9 @@ import { Ingredient } from '../entities/ingredient.entity';
 import { IngredientAntikvitet } from '../entities/ingredientAntikvitet.entity';
 import { Photo } from '../entities/photo.entity';
 import { AdministratorController } from './controllers/api/administrator.contoller';
+import { AntikvitetService } from './services/antikvitet/antikvitet.service';
+import { AntikvitetController } from './controllers/api/antikvitet.controler';
+
 
 
 
@@ -24,12 +27,20 @@ import { AdministratorController } from './controllers/api/administrator.contoll
       database: DatabaseConfiguration.database,
       entities: [Administrator, Antikvitet, Country, Ingredient, IngredientAntikvitet, Photo ]
     }),
-      TypeOrmModule.forFeature([ Administrator])
+      TypeOrmModule.forFeature([ 
+        Administrator,
+        Antikvitet,
+
+      ])
   ],
   controllers: [
     AppController,
     AdministratorController,
+    AntikvitetController,
+    
   ],
-  providers: [AdministratorService],
+  providers: [AdministratorService, AntikvitetService,
+  
+],
 })
 export class AppModule {}

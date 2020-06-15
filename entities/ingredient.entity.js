@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ingredient = void 0;
 const typeorm_1 = require("typeorm");
 const ingredientAntikvitet_entity_1 = require("./ingredientAntikvitet.entity");
+const antikvitet_entity_1 = require("./antikvitet.entity");
 let Ingredient = class Ingredient {
 };
 __decorate([
@@ -30,6 +31,15 @@ __decorate([
     typeorm_1.OneToMany(() => ingredientAntikvitet_entity_1.IngredientAntikvitet, (ingredientAntikvitet) => ingredientAntikvitet.ingredient),
     __metadata("design:type", Array)
 ], Ingredient.prototype, "ingredientAntikvitets", void 0);
+__decorate([
+    typeorm_1.ManyToMany(type => antikvitet_entity_1.Antikvitet, antikvitet => antikvitet.ingredients),
+    typeorm_1.JoinTable({
+        name: "ingredient_antikvitet",
+        joinColumn: { name: "ingredient_id", referencedColumnName: "ingredientId" },
+        inverseJoinColumn: { name: "antikvitet_id", referencedColumnName: "antikvitetId" }
+    }),
+    __metadata("design:type", Array)
+], Ingredient.prototype, "antikvitets", void 0);
 Ingredient = __decorate([
     typeorm_1.Index("uq_ingredient_name", ["name"], { unique: true }),
     typeorm_1.Entity()

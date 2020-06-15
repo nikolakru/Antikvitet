@@ -6,10 +6,13 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { Country } from "./country.entity";
 import { IngredientAntikvitet } from "./ingredientAntikvitet.entity";
 import { Photo } from "./photo.entity";
+import { Ingredient } from "./ingredient.entity";
 
 @Index("fk_antikvitet_country_id", ["countryId"], {})
 @Index("uq_antikvitet_name", ["name"], { unique: true })
@@ -57,6 +60,14 @@ export class Antikvitet {
     (ingredientAntikvitet) => ingredientAntikvitet.antikvitet
   )
   ingredientAntikvitets: IngredientAntikvitet[];
+
+  @ManyToMany(type => Ingredient, ingredient => ingredient.antikvitets)
+  @JoinTable({
+    name: "ingredient_antikvitet",
+    joinColumn: { name: "antikvitet_id", referencedColumnName: "antikvitetId"},
+    inverseJoinColumn: { name: "ingredient_id", referencedColumnName: "ingredientId"}
+  })
+  ingredients: Ingredient[];
 
   @OneToMany(() => Photo, (photo) => photo.antikvitet)
   photos: Photo[];

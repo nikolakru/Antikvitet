@@ -19,6 +19,8 @@ const ingredient_entity_1 = require("../entities/ingredient.entity");
 const ingredientAntikvitet_entity_1 = require("../entities/ingredientAntikvitet.entity");
 const photo_entity_1 = require("../entities/photo.entity");
 const administrator_contoller_1 = require("./controllers/api/administrator.contoller");
+const antikvitet_service_1 = require("./services/antikvitet/antikvitet.service");
+const antikvitet_controler_1 = require("./controllers/api/antikvitet.controler");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -33,13 +35,18 @@ AppModule = __decorate([
                 database: database_configuration_1.DatabaseConfiguration.database,
                 entities: [administrator_entity_1.Administrator, antikvitet_entity_1.Antikvitet, country_entity_1.Country, ingredient_entity_1.Ingredient, ingredientAntikvitet_entity_1.IngredientAntikvitet, photo_entity_1.Photo]
             }),
-            typeorm_1.TypeOrmModule.forFeature([administrator_entity_1.Administrator])
+            typeorm_1.TypeOrmModule.forFeature([
+                administrator_entity_1.Administrator,
+                antikvitet_entity_1.Antikvitet,
+            ])
         ],
         controllers: [
             app_controller_1.AppController,
             administrator_contoller_1.AdministratorController,
+            antikvitet_controler_1.AntikvitetController,
         ],
-        providers: [administrator_service_1.AdministratorService],
+        providers: [administrator_service_1.AdministratorService, antikvitet_service_1.AntikvitetService,
+        ],
     })
 ], AppModule);
 exports.AppModule = AppModule;

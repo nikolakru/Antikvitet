@@ -19,9 +19,7 @@ export class Country {
   @Column("varchar", { name: "country_name", unique: true, length: 50 })
   countryName: string;
 
-  @Column("int", { name: "antikvitet_id", unsigned: true })
-  antikvitetId: number;
-
+  
   @OneToMany(() => Antikvitet, (antikvitet) => antikvitet.country2)
   antikvitets: Antikvitet[];
 

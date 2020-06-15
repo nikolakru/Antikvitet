@@ -23,10 +23,6 @@ __decorate([
     __metadata("design:type", String)
 ], Country.prototype, "countryName", void 0);
 __decorate([
-    typeorm_1.Column("int", { name: "antikvitet_id", unsigned: true }),
-    __metadata("design:type", Number)
-], Country.prototype, "antikvitetId", void 0);
-__decorate([
     typeorm_1.OneToMany(() => antikvitet_entity_1.Antikvitet, (antikvitet) => antikvitet.country2),
     __metadata("design:type", Array)
 ], Country.prototype, "antikvitets", void 0);

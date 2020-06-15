@@ -4,8 +4,11 @@ import {
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { IngredientAntikvitet } from "./ingredientAntikvitet.entity";
+import { Antikvitet } from "./antikvitet.entity";
 
 @Index("uq_ingredient_name", ["name"], { unique: true })
 @Entity()
@@ -25,4 +28,12 @@ export class Ingredient {
     (ingredientAntikvitet) => ingredientAntikvitet.ingredient
   )
   ingredientAntikvitets: IngredientAntikvitet[];
+
+  @ManyToMany(type => Antikvitet, antikvitet => antikvitet.ingredients)
+  @JoinTable({
+    name: "ingredient_antikvitet",
+    joinColumn: { name: "ingredient_id", referencedColumnName: "ingredientId"},
+    inverseJoinColumn: { name: "antikvitet_id", referencedColumnName: "antikvitetId"}
+  })
+  antikvitets: Antikvitet[];
 }

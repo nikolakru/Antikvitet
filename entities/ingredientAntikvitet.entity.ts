@@ -39,6 +39,8 @@ export class IngredientAntikvitet {
     (ingredient) => ingredient.ingredientAntikvitets,
     { onDelete: "NO ACTION", onUpdate: "CASCADE" }
   )
+
+ 
   @JoinColumn([{ name: "ingredient_id", referencedColumnName: "ingredientId" }])
   ingredient: Ingredient;
 }
