@@ -16,7 +16,8 @@ exports.AdministratorController = void 0;
 const common_1 = require("@nestjs/common");
 const administrator_service_1 = require("../../services/administrator/administrator.service");
 const add_administrator_dto_1 = require("../../dtos/administrator/add.administrator.dto");
-const edit_admnistrator_dto_1 = require("../../dtos/administrator/edit.admnistrator.dto");
+const edit_administrator_dto_1 = require("../../dtos/administrator/edit.administrator.dto");
+const api_response_class_1 = require("../../misc/api.response.class");
 let AdministratorController = class AdministratorController {
     constructor(administratorService) {
         this.administratorService = administratorService;
@@ -25,7 +26,13 @@ let AdministratorController = class AdministratorController {
         return this.administratorService.getAll();
     }
     getById(administratorId) {
-        return this.administratorService.getById(administratorId);
+        return new Promise(async (resolve) => {
+            let admin = await this.administratorService.getById(administratorId);
+            if (admin === undefined) {
+                resolve(new api_response_class_1.ApiResponse("error", -1002));
+            }
+            resolve(admin);
+        });
     }
     add(data) {
         return this.administratorService.add(data);
@@ -56,9 +63,9 @@ __decorate([
 ], AdministratorController.prototype, "add", null);
 __decorate([
     common_1.Post(':id'),
-    __param(0, common_1.Param(':id')), __param(1, common_1.Body()),
+    __param(0, common_1.Param('id')), __param(1, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, edit_admnistrator_dto_1.EditAdmnistratorDto]),
+    __metadata("design:paramtypes", [Number, edit_administrator_dto_1.EditAdministratorDto]),
     __metadata("design:returntype", Promise)
 ], AdministratorController.prototype, "edit", null);
 AdministratorController = __decorate([

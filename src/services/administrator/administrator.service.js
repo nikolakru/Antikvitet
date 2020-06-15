@@ -40,7 +40,7 @@ let AdministratorService = class AdministratorService {
         return new Promise((resolve) => {
             this.administrator.save(newAdmin)
                 .then(data => resolve(data))
-                .catch(error => {
+                .catch(() => {
                 const response = new api_response_class_1.ApiResponse("error", -1001);
                 resolve(response);
             });
@@ -48,6 +48,11 @@ let AdministratorService = class AdministratorService {
     }
     async editById(id, data) {
         let admin = await this.administrator.findOne(id);
+        if (admin === undefined) {
+            return new Promise((resolve) => {
+                resolve(new api_response_class_1.ApiResponse("error", -1002));
+            });
+        }
         const cryprto = require('crypto');
         const passwordHash = cryprto.createHash('sha512');
         passwordHash.update(data.password);

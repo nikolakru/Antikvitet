@@ -4,8 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Administrator } from '../../../entities/administrator.entity';
 import { AddAdministratorDto } from '../../dtos/administrator/add.administrator.dto';
-import { EditAdmnistratorDto } from '../../dtos/administrator/edit.admnistrator.dto';
-import { resolve } from 'path';
+import { EditAdministratorDto } from '../../dtos/administrator/edit.administrator.dto';
 import { ApiResponse } from '../../misc/api.response.class';
 
 Administrator
@@ -40,7 +39,7 @@ export class AdministratorService {
         return new Promise((resolve) => {
             this.administrator.save(newAdmin)
             .then(data => resolve(data))
-            .catch(error => {
+            .catch(() => {
                 const response: ApiResponse = new ApiResponse("error", -1001);
                 resolve(response);
             }
@@ -48,8 +47,14 @@ export class AdministratorService {
         });
     }
 
-    async editById(id: number, data: EditAdmnistratorDto): Promise<Administrator>{
+    async editById(id: number, data: EditAdministratorDto): Promise<Administrator | ApiResponse>{
         let admin: Administrator = await this.administrator.findOne(id);
+
+        if(admin === undefined) {
+            return new Promise((resolve)=> {
+                resolve(new ApiResponse("error", -1002));
+            });
+        }
 
         const cryprto = require('crypto');
         const passwordHash = cryprto.createHash('sha512');
