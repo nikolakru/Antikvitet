@@ -30,8 +30,8 @@ let AdministratorController = class AdministratorController {
     add(data) {
         return this.administratorService.add(data);
     }
-    edit(id, date) {
-        return this.administratorService.editById(id, date);
+    edit(id, data) {
+        return this.administratorService.editById(id, data);
     }
 };
 __decorate([

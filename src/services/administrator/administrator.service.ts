@@ -5,6 +5,8 @@ import { Repository } from 'typeorm';
 import { Administrator } from '../../../entities/administrator.entity';
 import { AddAdministratorDto } from '../../dtos/administrator/add.administrator.dto';
 import { EditAdmnistratorDto } from '../../dtos/administrator/edit.admnistrator.dto';
+import { resolve } from 'path';
+import { ApiResponse } from '../../misc/api.response.class';
 
 Administrator
 @Injectable()
@@ -21,7 +23,7 @@ export class AdministratorService {
     getById(id: number): Promise<Administrator>{
         return this.administrator.findOne(id);
     }
-    add(data: AddAdministratorDto){
+    add(data: AddAdministratorDto): Promise<Administrator | ApiResponse>{
         const cryprto = require('crypto');
 
         const passwordHash = cryprto.createHash('sha512');
@@ -33,9 +35,17 @@ export class AdministratorService {
         newAdmin.username = data.username;
         newAdmin.passwordHash = passwordHashString;
 
-        this.administrator.save(newAdmin);
+        
 
-        return this.administrator.save(newAdmin);
+        return new Promise((resolve) => {
+            this.administrator.save(newAdmin)
+            .then(data => resolve(data))
+            .catch(error => {
+                const response: ApiResponse = new ApiResponse("error", -1001);
+                resolve(response);
+            }
+            );
+        });
     }
 
     async editById(id: number, data: EditAdmnistratorDto): Promise<Administrator>{
@@ -44,7 +54,7 @@ export class AdministratorService {
         const cryprto = require('crypto');
         const passwordHash = cryprto.createHash('sha512');
         passwordHash.update(data.password);
-        const passwordHashString = passwordHash.digest('hex').toUpperCase()
+        const passwordHashString = passwordHash.digest('hex').toUpperCase();
 
 
         admin.passwordHash = passwordHashString;

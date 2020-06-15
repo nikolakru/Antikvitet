@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const administrator_entity_1 = require("../../../entities/administrator.entity");
+const api_response_class_1 = require("../../misc/api.response.class");
 administrator_entity_1.Administrator;
 let AdministratorService = class AdministratorService {
     constructor(administrator) {
@@ -36,8 +37,14 @@ let AdministratorService = class AdministratorService {
         let newAdmin = new administrator_entity_1.Administrator();
         newAdmin.username = data.username;
         newAdmin.passwordHash = passwordHashString;
-        this.administrator.save(newAdmin);
-        return this.administrator.save(newAdmin);
+        return new Promise((resolve) => {
+            this.administrator.save(newAdmin)
+                .then(data => resolve(data))
+                .catch(error => {
+                const response = new api_response_class_1.ApiResponse("error", -1001);
+                resolve(response);
+            });
+        });
     }
     async editById(id, data) {
         let admin = await this.administrator.findOne(id);
