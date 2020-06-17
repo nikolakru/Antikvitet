@@ -35,7 +35,6 @@ __decorate([
     __metadata("design:type", antikvitet_entity_1.Antikvitet)
 ], Country.prototype, "antikvitet", void 0);
 Country = __decorate([
-    typeorm_1.Index("fk_country_antikvitet_id", ["antikvitetId"], {}),
     typeorm_1.Index("uq_country_country_name", ["countryName"], { unique: true }),
     typeorm_1.Entity()
 ], Country);

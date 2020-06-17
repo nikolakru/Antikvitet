@@ -1,0 +1,1 @@
+{"version":3,"file":"jwt.data.administrator.dto.js","sourceRoot":"","sources":["jwt.data.administrator.dto.ts"],"names":[],"mappings":";;;AAAA,MAAa,sBAAsB;IAQ/B,aAAa;QACT,OAAM;YACF,eAAe,EAAE,IAAI,CAAC,eAAe;YACrC,QAAQ,EAAE,IAAI,CAAC,QAAQ;YACvB,GAAG,EAAE,IAAI,CAAC,GAAG;YACb,EAAE,EAAE,IAAI,CAAC,EAAE;YACX,EAAE,EAAE,IAAI,CAAC,EAAE;SACd,CAAA;IACL,CAAC;CACJ;AAjBD,wDAiBC"}

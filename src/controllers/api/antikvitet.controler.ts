@@ -2,6 +2,7 @@ import { Antikvitet } from "../../../entities/antikvitet.entity";
 import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete, Patch } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { AntikvitetService } from "../../services/antikvitet/antikvitet.service";
+import { AddAntikvitetDto } from "../../dtos/antikvitet/add.antikvitet.dto";
 
 
 
@@ -39,8 +40,11 @@ import { AntikvitetService } from "../../services/antikvitet/antikvitet.service"
 export class AntikvitetController {
     constructor(
         public service: AntikvitetService
-        
-        ) {
+      ) {
 
+        }
+        @Post('createFull')
+        createFullAntikvitet(@Body() data: AddAntikvitetDto){
+            return this.service.createFullAntikvitet(data);
         }
     }

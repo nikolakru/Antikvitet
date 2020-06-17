@@ -12,6 +12,7 @@ import { Photo } from '../entities/photo.entity';
 import { AdministratorController } from './controllers/api/administrator.contoller';
 import { AntikvitetService } from './services/antikvitet/antikvitet.service';
 import { AntikvitetController } from './controllers/api/antikvitet.controler';
+import { AuthController } from './controllers/api/auth.controller';
 
 
 
@@ -30,6 +31,8 @@ import { AntikvitetController } from './controllers/api/antikvitet.controler';
       TypeOrmModule.forFeature([ 
         Administrator,
         Antikvitet,
+        IngredientAntikvitet,
+        
 
       ])
   ],
@@ -37,6 +40,8 @@ import { AntikvitetController } from './controllers/api/antikvitet.controler';
     AppController,
     AdministratorController,
     AntikvitetController,
+    AuthController,
+    
     
   ],
   providers: [AdministratorService, AntikvitetService,

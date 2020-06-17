@@ -18,6 +18,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const administrator_entity_1 = require("../../../entities/administrator.entity");
 const api_response_class_1 = require("../../misc/api.response.class");
+const crypto = require("crypto");
 administrator_entity_1.Administrator;
 let AdministratorService = class AdministratorService {
     constructor(administrator) {
@@ -26,12 +27,19 @@ let AdministratorService = class AdministratorService {
     getAll() {
         return this.administrator.find();
     }
+    async getByUsername(username) {
+        const admin = await this.administrator.findOne({
+            username: username
+        });
+        if (admin) {
+            return admin;
+        }
+    }
     getById(id) {
         return this.administrator.findOne(id);
     }
     add(data) {
-        const cryprto = require('crypto');
-        const passwordHash = cryprto.createHash('sha512');
+        const passwordHash = crypto.createHash('sha512');
         passwordHash.update(data.password);
         const passwordHashString = passwordHash.digest('hex').toUpperCase();
         let newAdmin = new administrator_entity_1.Administrator();
@@ -53,8 +61,7 @@ let AdministratorService = class AdministratorService {
                 resolve(new api_response_class_1.ApiResponse("error", -1002));
             });
         }
-        const cryprto = require('crypto');
-        const passwordHash = cryprto.createHash('sha512');
+        const passwordHash = crypto.createHash('sha512');
         passwordHash.update(data.password);
         const passwordHashString = passwordHash.digest('hex').toUpperCase();
         admin.passwordHash = passwordHashString;

@@ -18,16 +18,41 @@ const antikvitet_entity_1 = require("../../../entities/antikvitet.entity");
 const crud_typeorm_1 = require("@nestjsx/crud-typeorm");
 const typeorm_1 = require("typeorm");
 const typeorm_2 = require("@nestjs/typeorm");
+const ingredientAntikvitet_entity_1 = require("../../../entities/ingredientAntikvitet.entity");
 let AntikvitetService = class AntikvitetService extends crud_typeorm_1.TypeOrmCrudService {
-    constructor(antikvitet) {
+    constructor(antikvitet, ingredientAntikvitet) {
         super(antikvitet);
         this.antikvitet = antikvitet;
+        this.ingredientAntikvitet = ingredientAntikvitet;
+    }
+    async createFullAntikvitet(data) {
+        let newAntikvitet = new antikvitet_entity_1.Antikvitet();
+        newAntikvitet.name = data.name;
+        newAntikvitet.descripton = data.description;
+        newAntikvitet.countryId = data.countryId;
+        newAntikvitet.year = data.year;
+        newAntikvitet.price = data.price;
+        let savedAntikvitet = await this.antikvitet.save(newAntikvitet);
+        for (let ingredient of data.ingredients) {
+            let newIngredientAntikvitet = new ingredientAntikvitet_entity_1.IngredientAntikvitet();
+            newIngredientAntikvitet.antikvitetId = savedAntikvitet.antikvitetId;
+            newIngredientAntikvitet.ingredientId = ingredient.ingredientId;
+            await this.ingredientAntikvitet.save(newIngredientAntikvitet);
+        }
+        return await this.antikvitet.findOne(savedAntikvitet.antikvitetId, {
+            relations: [
+                "country2",
+                "ingredients"
+            ]
+        });
     }
 };
 AntikvitetService = __decorate([
     common_1.Injectable(),
     __param(0, typeorm_2.InjectRepository(antikvitet_entity_1.Antikvitet)),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __param(1, typeorm_2.InjectRepository(ingredientAntikvitet_entity_1.IngredientAntikvitet)),
+    __metadata("design:paramtypes", [typeorm_1.Repository,
+        typeorm_1.Repository])
 ], AntikvitetService);
 exports.AntikvitetService = AntikvitetService;
 //# sourceMappingURL=antikvitet.service.js.map

@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import { Antikvitet } from "./antikvitet.entity";
 
-@Index("fk_country_antikvitet_id", ["antikvitetId"], {})
+
 @Index("uq_country_country_name", ["countryName"], { unique: true })
 @Entity()
 export class Country {

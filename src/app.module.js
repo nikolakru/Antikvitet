@@ -21,6 +21,7 @@ const photo_entity_1 = require("../entities/photo.entity");
 const administrator_contoller_1 = require("./controllers/api/administrator.contoller");
 const antikvitet_service_1 = require("./services/antikvitet/antikvitet.service");
 const antikvitet_controler_1 = require("./controllers/api/antikvitet.controler");
+const auth_controller_1 = require("./controllers/api/auth.controller");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -38,12 +39,14 @@ AppModule = __decorate([
             typeorm_1.TypeOrmModule.forFeature([
                 administrator_entity_1.Administrator,
                 antikvitet_entity_1.Antikvitet,
+                ingredientAntikvitet_entity_1.IngredientAntikvitet,
             ])
         ],
         controllers: [
             app_controller_1.AppController,
             administrator_contoller_1.AdministratorController,
             antikvitet_controler_1.AntikvitetController,
+            auth_controller_1.AuthController,
         ],
         providers: [administrator_service_1.AdministratorService, antikvitet_service_1.AntikvitetService,
         ],

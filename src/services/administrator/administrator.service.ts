@@ -6,7 +6,7 @@ import { Administrator } from '../../../entities/administrator.entity';
 import { AddAdministratorDto } from '../../dtos/administrator/add.administrator.dto';
 import { EditAdministratorDto } from '../../dtos/administrator/edit.administrator.dto';
 import { ApiResponse } from '../../misc/api.response.class';
-
+import * as crypto from 'crypto';
 Administrator
 @Injectable()
 export class AdministratorService {
@@ -19,13 +19,23 @@ export class AdministratorService {
     getAll(): Promise<Administrator[]>{
         return this.administrator.find();
     }
+
+    async getByUsername(username: string): Promise<Administrator| null > {
+        const admin = await this.administrator.findOne({
+            username: username
+        });
+        if(admin){
+            return admin;
+        }
+    }
+
     getById(id: number): Promise<Administrator>{
         return this.administrator.findOne(id);
     }
     add(data: AddAdministratorDto): Promise<Administrator | ApiResponse>{
-        const cryprto = require('crypto');
+        
 
-        const passwordHash = cryprto.createHash('sha512');
+        const passwordHash = crypto.createHash('sha512');
         passwordHash.update(data.password);
 
         const passwordHashString = passwordHash.digest('hex').toUpperCase();
@@ -56,8 +66,8 @@ export class AdministratorService {
             });
         }
 
-        const cryprto = require('crypto');
-        const passwordHash = cryprto.createHash('sha512');
+       
+        const passwordHash = crypto.createHash('sha512');
         passwordHash.update(data.password);
         const passwordHashString = passwordHash.digest('hex').toUpperCase();
 
