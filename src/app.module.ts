@@ -14,6 +14,7 @@ import { AntikvitetService } from './services/antikvitet/antikvitet.service';
 import { AntikvitetController } from './controllers/api/antikvitet.controler';
 import { AuthController } from './controllers/api/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
+import { PhotoService } from './services/photo/photo.service';
 
 
 
@@ -33,6 +34,7 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
         Administrator,
         Antikvitet,
         IngredientAntikvitet,
+        Photo,
         
 
       ])
@@ -45,7 +47,10 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
     
     
   ],
-  providers: [AdministratorService, AntikvitetService,
+  providers: [AdministratorService,
+     AntikvitetService,
+     PhotoService,
+     
 
   
 ],
