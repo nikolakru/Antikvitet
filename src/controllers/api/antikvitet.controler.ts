@@ -89,11 +89,13 @@ export class AntikvitetController {
                }),
                fileFilter: (req, file , callback) => {
                     if(file.originalname.toLowerCase().match(/\.(jpg | png)$/)){
-                        callback(new Error('Bad file extensions!'), false);
+                        req.fileFilterError = 'Bad file extension!';
+                        callback(null, false);
                         return;
                     }
                     if(!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))){
-                        callback(new Error('Bad file content!'), false);
+                        req.fileFilterError = 'Bad file content!';
+                        callback(null, false);
                         return;
                     }
 
@@ -102,13 +104,23 @@ export class AntikvitetController {
                },
                limits:{
                    files: 1,
-                   fieldSize: StorageConfig.photoMaxFileSize,
+                   fileSize: StorageConfig.photoMaxFileSize,
 
                },
             })
         )
-        async uploadPhoto(@Param('id') antikvitetId: number, @UploadedFile() photo): Promise< ApiResponse | Photo> {
-            let imagePath = photo.filename;
+        async uploadPhoto(@Param('id') antikvitetId: number,
+         @UploadedFile() photo,
+         @Req() req
+         ): Promise< ApiResponse | Photo> {
+                if(req.fileFilterError){
+                    return new ApiResponse('error', -4002, req.fileFilterError);
+                }
+
+                if(!photo){
+                    return new ApiResponse('error', -4002, 'File not uploaded');
+                }
+            
             
             const newPhoto: Photo = new Photo();
             newPhoto.antikvitetId = antikvitetId;
