@@ -11,6 +11,8 @@ import { PhotoService } from "../../services/photo/photo.service";
 import { ApiResponse } from "../../misc/api.response.class";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
+import { identity } from "rxjs";
+import { EditAntikvitetDto } from "src/dtos/antikvitet/edit.antikvitet.dto";
 
 @Controller('api/antikvitet')
 @Crud({
@@ -38,6 +40,10 @@ import * as fs from 'fs';
                 
 
             }
+        },
+        routes: {
+            exclude: ['updateOneBase', 'replaceOneBase', 'deleteOneBase']
+
         }
 })
 export class AntikvitetController {
@@ -53,6 +59,11 @@ export class AntikvitetController {
         createFullAntikvitet(@Body() data: AddAntikvitetDto){
             return this.service.createFullAntikvitet(data);
         }
+        @Patch(':id')
+        editAntikvitet(@Param('id') id: number, @Body()data: EditAntikvitetDto){
+            return this.service.editAntikvitet(id, data);
+        }
+
 
         @Post(':id/uploadPhoto')
         @UseInterceptors(

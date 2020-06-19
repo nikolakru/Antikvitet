@@ -7,6 +7,7 @@ import { AddAntikvitetDto } from "../../dtos/antikvitet/add.antikvitet.dto";
 import { ApiResponse } from "../../misc/api.response.class";
 
 import { IngredientAntikvitet } from "../../../entities/ingredientAntikvitet.entity";
+import { EditAntikvitetDto } from "src/dtos/antikvitet/edit.antikvitet.dto";
 
 
 
@@ -43,13 +44,57 @@ export class AntikvitetService extends TypeOrmCrudService<Antikvitet> {
            }
                 return await this.antikvitet.findOne(savedAntikvitet.antikvitetId, {
                relations: [
-                   "country2",
+                   
                    "ingredients"
 
                ]
            });
         
     }
+    
+    async editAntikvitet(antikvitetId: number, data: EditAntikvitetDto): Promise<Antikvitet | ApiResponse> {
+        const existingAntikvitet: Antikvitet = await this.antikvitet.findOne(antikvitetId,
+            {
+                relations: ['ingredients']
+            });
+
+        if(!existingAntikvitet){
+            return new ApiResponse('error', -5001, 'Antikvitet not found');
+
+        }
+        existingAntikvitet.name = data.name;
+        existingAntikvitet.descripton = data.description;
+        existingAntikvitet.price = data.price;
+        existingAntikvitet.year = Math.round(data.price)
+        existingAntikvitet.countryId = data.countryId;
+
+        const savedAntikvitet = await this.antikvitet.save(existingAntikvitet);
+
+        if(!savedAntikvitet){
+            return new ApiResponse('error', -5002, 'Could not save new antikvitet data. ');
+
+        }
+
+        if(data.ingredients !== null){
+            await this.ingredientAntikvitet.remove(existingAntikvitet.ingredientAntikvitets)
+
+      for (let ingredient of data.ingredients) {
+        let newIngredientAntikvitet: IngredientAntikvitet = new IngredientAntikvitet()
+        newIngredientAntikvitet.antikvitetId = antikvitetId;
+        newIngredientAntikvitet.ingredientId = ingredient.ingredientId;
+
+        await this.ingredientAntikvitet.save(newIngredientAntikvitet);
+      }
+
+    }
+    return await this.antikvitet.findOne(antikvitetId, {
+        relations: [
+        "ingredients"
+
+    ]
+});
+    }
+        
             
 }
     
