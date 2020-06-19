@@ -9,8 +9,8 @@ import { StorageConfig } from '../../../config/storage.config';
 import { Photo } from "../../../entities/photo.entity";
 import { PhotoService } from "../../services/photo/photo.service";
 import { ApiResponse } from "../../misc/api.response.class";
-
-
+import * as fileType from 'file-type';
+import * as fs from 'fs';
 
 @Controller('api/antikvitet')
 @Crud({
@@ -120,6 +120,20 @@ export class AntikvitetController {
                 if(!photo){
                     return new ApiResponse('error', -4002, 'File not uploaded');
                 }
+
+                const fileTypeResult = await fileType.fromFile(photo.path);
+                if(!fileTypeResult){
+                    fs.unlinkSync(photo.path);
+                    return new ApiResponse('error', -4002, 'Cannot detect file type!');
+
+                }
+                const realMimeType = fileTypeResult.mime;
+                if(!(realMimeType.includes('jpeg') || realMimeType.includes('png'))){
+                    fs.unlinkSync(photo.path);
+                    return new ApiResponse('error', -4002, 'Bad file content type!');
+                }
+
+
             
             
             const newPhoto: Photo = new Photo();
