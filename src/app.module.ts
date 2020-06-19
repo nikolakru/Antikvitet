@@ -15,6 +15,10 @@ import { AntikvitetController } from './controllers/api/antikvitet.controler';
 import { AuthController } from './controllers/api/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
 import { PhotoService } from './services/photo/photo.service';
+import { IngredientService } from './services/ingredient/ingredient.service';
+import { CountryService } from './services/country/country.service';
+import { IngredientController } from './controllers/api/ingredient.contoller';
+import { CountryController } from './controllers/api/country.controller';
 
 
 
@@ -34,7 +38,10 @@ import { PhotoService } from './services/photo/photo.service';
         Administrator,
         Antikvitet,
         IngredientAntikvitet,
+        Ingredient,
         Photo,
+        Country,
+      
         
 
       ])
@@ -44,12 +51,18 @@ import { PhotoService } from './services/photo/photo.service';
     AdministratorController,
     AntikvitetController,
     AuthController,
+    IngredientController,
+    CountryController,
+
     
     
   ],
   providers: [AdministratorService,
      AntikvitetService,
      PhotoService,
+     IngredientService,
+     CountryService
+     
      
 
   
