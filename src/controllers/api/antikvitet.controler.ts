@@ -148,4 +148,39 @@ export class AntikvitetController {
             return savedPhoto;
 
         }
+
+        @Delete(':antikvitetId/deletePhoto/:photoId')
+        public async deletePhoto(
+            @Param('antikvitetId') antikvitetId: number,
+            @Param('photoId') photoId: number,
+            ){
+                const photo = await this.photoservice.findOne({
+                    antikvitetId: antikvitetId,
+                    photoId: photoId
+                });
+
+                if(!photo){
+                    return new ApiResponse('error', -4004, 'Photo not found!');
+
+                }
+                try{
+
+                
+                fs.unlinkSync(StorageConfig.photos + photo.imagePath);
+
+                } catch (e){
+                    
+                }
+
+                const deleteResult = await this.photoservice.deleteById(photoId);
+
+                if(deleteResult.affected === 0){
+                    return new ApiResponse('error', -4004, 'Photo not found!');
+
+                }
+
+                return new ApiResponse('ok', 0, 'One photo deleted!');
+            }
+
+        
     }
