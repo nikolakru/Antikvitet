@@ -1,4 +1,4 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { AppController } from './controllers/app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfiguration } from '../config/database.configuration';
@@ -72,6 +72,12 @@ import { CountryController } from './controllers/api/country.controller';
 })
 export class AppModule implements NestModule  {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).exclude('auth/*').forRoutes('api/*')
+    consumer.apply(AuthMiddleware)
+    .exclude('auth/*')
+    .forRoutes({path: 'api/*', method: RequestMethod.POST},
+    {path: 'api/*', method: RequestMethod.PATCH},
+    {path: 'api/*', method: RequestMethod.DELETE},
+    {path: 'api/*', method: RequestMethod.PUT},
+    )
   }
 }

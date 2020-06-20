@@ -39,7 +39,7 @@ export class AntikvitetService extends TypeOrmCrudService<Antikvitet> {
            for ( let ingredient of data.ingredients) {
                let newIngredientAntikvitet = new IngredientAntikvitet();
                newIngredientAntikvitet.antikvitetId = savedAntikvitet.antikvitetId;
-                newIngredientAntikvitet.ingredientId = ingredient.ingredientId;
+                newIngredientAntikvitet.ingredientId = ingredient.igredientId;
                await  this.ingredientAntikvitet.save(newIngredientAntikvitet);
            }
                 return await this.antikvitet.findOne(savedAntikvitet.antikvitetId, {
@@ -81,7 +81,7 @@ export class AntikvitetService extends TypeOrmCrudService<Antikvitet> {
       for (let ingredient of data.ingredients) {
         let newIngredientAntikvitet: IngredientAntikvitet = new IngredientAntikvitet()
         newIngredientAntikvitet.antikvitetId = antikvitetId;
-        newIngredientAntikvitet.ingredientId = ingredient.ingredientId;
+        newIngredientAntikvitet.ingredientId = ingredient.igredientId;
 
         await this.ingredientAntikvitet.save(newIngredientAntikvitet);
       }

@@ -69,7 +69,7 @@ export class AntikvitetController {
         @UseInterceptors(
             FileInterceptor('photo',{
                storage: diskStorage({
-                    destination : StorageConfig.photos,
+                    destination : StorageConfig.photo.photos,
                     filename: (req, file, callback) => {
 
 
@@ -115,7 +115,7 @@ export class AntikvitetController {
                },
                limits:{
                    files: 1,
-                   fileSize: StorageConfig.photoMaxFileSize,
+                   fileSize: StorageConfig.photo.photoMaxFileSize,
 
                },
             })
@@ -177,7 +177,7 @@ export class AntikvitetController {
                 try{
 
                 
-                fs.unlinkSync(StorageConfig.photos + photo.imagePath);
+                fs.unlinkSync(StorageConfig.photo.photos + photo.imagePath);
 
                 } catch (e){
                     

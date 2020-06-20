@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Antikvitet } from "./antikvitet.entity";
-
+import * as Validator from 'class-validator';
 
 @Index("uq_country_country_name", ["countryName"], { unique: true })
 @Entity()
@@ -17,6 +17,9 @@ export class Country {
   countryId: number;
 
   @Column("varchar", { name: "country_name", unique: true, length: 50 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(5, 50)
   countryName: string;
 
   

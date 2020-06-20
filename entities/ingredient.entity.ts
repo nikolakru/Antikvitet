@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import { IngredientAntikvitet } from "./ingredientAntikvitet.entity";
 import { Antikvitet } from "./antikvitet.entity";
-
+import * as Validator from 'class-validator';
 @Index("uq_ingredient_name", ["name"], { unique: true })
 @Entity()
 export class Ingredient {
@@ -21,6 +21,9 @@ export class Ingredient {
   ingredientId: number;
 
   @Column("varchar", { name: "name", unique: true, length: 50 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(3,50)
   name: string;
 
   @OneToMany(
