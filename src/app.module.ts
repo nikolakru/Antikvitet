@@ -19,6 +19,7 @@ import { IngredientService } from './services/ingredient/ingredient.service';
 import { CountryService } from './services/country/country.service';
 import { IngredientController } from './controllers/api/ingredient.contoller';
 import { CountryController } from './controllers/api/country.controller';
+import { AdministratorToken } from 'entities/administrator-token.entity';
 
 
 
@@ -32,7 +33,7 @@ import { CountryController } from './controllers/api/country.controller';
       username: DatabaseConfiguration.username,
       password: DatabaseConfiguration.password,
       database: DatabaseConfiguration.database,
-      entities: [Administrator, Antikvitet, Country, Ingredient, IngredientAntikvitet, Photo ]
+      entities: [Administrator, Antikvitet, Country, Ingredient, IngredientAntikvitet, Photo, AdministratorToken ]
     }),
       TypeOrmModule.forFeature([ 
         Administrator,
@@ -41,6 +42,7 @@ import { CountryController } from './controllers/api/country.controller';
         Ingredient,
         Photo,
         Country,
+        AdministratorToken,
       
         
 
