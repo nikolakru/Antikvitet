@@ -17,13 +17,12 @@ export class EditAntikvitetDto {
   })
   @Validator.IsPositive()
   price: number;
-  @Validator.IsNotEmpty()
-  @Validator.IsNumber({
-  allowInfinity: false,
-  allowNaN: false
-   })
-  @Validator.IsPositive()
-    year: number;
+  
+    @Validator.IsNotEmpty()
+    @Validator.IsString()
+    @Validator.Length(4,50)
+    @Validator.Matches(/^[0-9]/g)
+    year: string;
     countryId: number;
 
     @Validator.IsOptional()

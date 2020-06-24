@@ -13,6 +13,8 @@ import * as fileType from 'file-type';
 import * as fs from 'fs';
 import { identity } from "rxjs";
 import { EditAntikvitetDto } from "src/dtos/antikvitet/edit.antikvitet.dto";
+import { AntikvitetSearchDto } from "src/dtos/antikvitet/antikvitet.search.dto";
+
 
 @Controller('api/antikvitet')
 @Crud({
@@ -191,6 +193,12 @@ export class AntikvitetController {
                 }
 
                 return new ApiResponse('ok', 0, 'One photo deleted!');
+            }
+
+
+            @Post('search')
+            async search(@Body() data: AntikvitetSearchDto): Promise<Antikvitet[]> {
+                return await this.service.search(data);
             }
 
         

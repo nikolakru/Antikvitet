@@ -23,8 +23,10 @@ export class AddAntikvitetDto {
     allowInfinity: false,
     allowNaN: false
      })
-    @Validator.IsPositive()
-    year: number;
+     @Validator.IsNotEmpty()
+     @Validator.IsString()
+     @Validator.Length(4,50)
+    year: string;
     countryId: number;
     @Validator.IsOptional()
     @Validator.IsArray()

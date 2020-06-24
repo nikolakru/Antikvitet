@@ -39,13 +39,13 @@ export class Antikvitet {
   @Column("int", { name: "country_id", unsigned: true, default: () => "'0'" })
   countryId: number;
 
-  @Column("varchar", { name: "descripton", length: 250 })
+  @Column("varchar", { name: "description", length: 250 })
   @Validator.IsNotEmpty()
   @Validator.IsString()
   @Validator.Length(10, 250)
-  descripton: string;
+  description: string;
 
-  @Column("int", { name: "price" })
+  @Column("double", { name: "price" })
 
   @Validator.IsNotEmpty()
   @Validator.IsNumber({
@@ -56,15 +56,14 @@ export class Antikvitet {
   @Validator.IsPositive()
   price: number;
 
-  @Column("int", { name: "year" })
+  @Column("varchar", { name: "year" })
 
+  
   @Validator.IsNotEmpty()
-  @Validator.IsNumber({
-    allowInfinity: false,
-    allowNaN: false
-  })
-  @Validator.IsPositive()
-  year: number;
+  @Validator.IsString()
+  @Validator.Length(4,50)
+  @Validator.Matches(/^[0-9]/g)
+  year: string;
 
   @ManyToOne(() => Country, (country) => country.antikvitets, {
     onDelete: "NO ACTION",
