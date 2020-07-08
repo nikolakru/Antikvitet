@@ -79,10 +79,10 @@ export class AntikvitetController {
                         
                         let normalized = original.replace(/\s+/g, '-');
                         let now = new Date()
-                        let datePart = ''
-                        datePart += now.getFullYear().toString()
-                        datePart += (now.getMonth() + 1).toString()
-                        datePart += now.getDate().toString()
+                        let datePart = '';
+                        datePart += now.getFullYear().toString();
+                        datePart += (now.getMonth() + 1).toString();
+                        datePart += now.getDate().toString();
 
                         const randomPart: string = 
                         new Array(10).fill(0).
